@@ -14,10 +14,13 @@ c = Label(root, text = "k").grid(row=1, column=4)
 
 u1 = Entry(root)
 u1.grid(row=1,column=1)
+u1.insert(0,"0")
 u2 = Entry(root)
 u2.grid(row=1, column=3)
+u2.insert(0,"0")
 u3 = Entry(root)
 u3.grid(row=1, column=5)
+u3.insert(0,"0")
 
 v_prime = Label(root, text="Vector 2").grid(row=3, column=0)
 
@@ -29,10 +32,13 @@ f = Label(root, text = "k").grid(row=4, column=4)
 
 v1 = Entry(root)
 v1.grid(row=4, column=1)
+v1.insert(0,"0")
 v2 = Entry(root)
 v2.grid(row=4, column=3)
+v2.insert(0,"0")
 v3 = Entry(root)
 v3.grid(row=4, column=5)
+v3.insert(0,"0")
 
 def calculate():
     final_vector = Vector(float(u2.get())*float(v3.get()) - float(u3.get())*float(v2.get()), float(u3.get())*float(v1.get()) - float(u1.get())*float(v3.get()), float(u1.get())*float(v2.get()) - float(u2.get())*float(v1.get()))
