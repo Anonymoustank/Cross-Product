@@ -1,5 +1,7 @@
 from tkinter import *
 
+import math
+
 root = Tk()
 
 root.title("Cross Product Calculator")
@@ -40,7 +42,16 @@ v3 = Entry(root)
 v3.grid(row=4, column=5)
 v3.insert(0,"0")
 
+list = [u1, u2, u3, v1, v2, v3]
+
 def calculate():
+    for i in list:
+        for y in i.get():
+            if y == "√":
+                x = i.get().replace("√", "")
+                z = str(math.sqrt(float(x)))
+                i.delete(0,"end")
+                i.insert(0,z)
     final_vector = Vector(float(u2.get())*float(v3.get()) - float(u3.get())*float(v2.get()), float(u3.get())*float(v1.get()) - float(u1.get())*float(v3.get()), float(u1.get())*float(v2.get()) - float(u2.get())*float(v1.get()))
     answer = Tk()
     answer.title("Answer")
