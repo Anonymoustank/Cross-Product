@@ -48,8 +48,19 @@ def calculate():
     for i in list:
         for y in i.get():
             if y == "√":
-                x = i.get().replace("√", "")
-                z = str(math.sqrt(float(x)))
+                #x = i.get().replace("√", "")
+                x = i.get()
+                before_root = ""
+                for z in i.get():
+                    if z == "√":
+                        x = x.replace("√","")
+                        break
+                    else:
+                        before_root = before_root + z
+                        x = x.replace(z,"",1)
+                z = float(math.sqrt(float(x)))
+                print(before_root)
+                z = z * float(before_root)
                 i.delete(0,"end")
                 i.insert(0,z)
     final_vector = Vector(float(u2.get())*float(v3.get()) - float(u3.get())*float(v2.get()), float(u3.get())*float(v1.get()) - float(u1.get())*float(v3.get()), float(u1.get())*float(v2.get()) - float(u2.get())*float(v1.get()))
