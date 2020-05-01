@@ -8,38 +8,38 @@ root.title("Cross Product Calculator")
 
 v = Label(root, text="Vector 1").grid(row=0, column=0)
 
-a = Label(root, text="i").grid(row=1, column=0)
+a = Label(root, text="i").grid(row=1, column=1)
 
-b = Label(root, text="j").grid(row=1, column=2)
+b = Label(root, text="j").grid(row=1, column=3)
 
-c = Label(root, text = "k").grid(row=1, column=4)
+c = Label(root, text = "k").grid(row=1, column=5)
 
 u1 = Entry(root)
-u1.grid(row=1,column=1)
+u1.grid(row=1,column=2)
 u1.insert(0,"0")
 u2 = Entry(root)
-u2.grid(row=1, column=3)
+u2.grid(row=1, column=4)
 u2.insert(0,"0")
 u3 = Entry(root)
-u3.grid(row=1, column=5)
+u3.grid(row=1, column=6)
 u3.insert(0,"0")
 
 v_prime = Label(root, text="Vector 2").grid(row=3, column=0)
 
-d = Label(root, text="i").grid(row=4, column=0)
+d = Label(root, text="i").grid(row=4, column=1)
 
-e = Label(root, text = "j").grid(row=4, column=2)
+e = Label(root, text = "j").grid(row=4, column=3)
 
-f = Label(root, text = "k").grid(row=4, column=4)
+f = Label(root, text = "k").grid(row=4, column=5)
 
 v1 = Entry(root)
-v1.grid(row=4, column=1)
+v1.grid(row=4, column=2)
 v1.insert(0,"0")
 v2 = Entry(root)
-v2.grid(row=4, column=3)
+v2.grid(row=4, column=4)
 v2.insert(0,"0")
 v3 = Entry(root)
-v3.grid(row=4, column=5)
+v3.grid(row=4, column=6)
 v3.insert(0,"0")
 
 list = [u1, u2, u3, v1, v2, v3]
