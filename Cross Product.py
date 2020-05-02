@@ -83,6 +83,12 @@ class Vector:
             self.k_sign = " - "
         self.j = abs(self.j)
         self.k = abs(self.k)
+        if self.k - int(self.k) == 0.0:
+            self.k = int(self.k)
+        if self.j - int(self.j) == 0.0:
+            self.j = int(self.j)
+        if self.i - int(self.i) == 0.0:
+            self.i = int(self.i)
     def doPrint(self):
         answer = Tk()
         answer.title("Answer")
