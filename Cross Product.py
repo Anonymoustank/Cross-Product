@@ -55,18 +55,17 @@ def calculate():
                 entry_number = entry_number * float(before_root)
                 i.delete(0,"end") #deletes whatever is in the entry
                 i.insert(0,entry_number) #puts the value within the entry
-    #creates the vector
-    final_vector = Vector(float(u1.get()), float(u2.get()), float(u3.get()), float(v1.get()), float(v2.get()), float(v3.get()))
+    
+    final_vector = Vector(u1, u2, u3, v1, v2, v3) #creates the vector
 
     
 button = Button(root, text="Calculate", command = calculate).grid(row=6, column=0) #button that triggers the calculate process
 
     
-def Vector(u_1, u_2, u_3, v_1, v_2, v_3):
-    global i, j, k, j_sign, k_sign
-    i = u_2 * v_3 - u_3 * v_2
-    j = u_3 * v_1 - u_1 * v_3
-    k = u_1 * v_2 - u_2 * v_1
+def Vector(u1, u2, u3, v1, v2, v3):
+    i = float(u2.get()) * float(v3.get()) - float(u3.get()) * float(v2.get())
+    j = float(u3.get()) * float(v1.get()) - float(u1.get()) * float(v3.get())
+    k = float(u1.get()) * float(v2.get()) - float(u2.get()) * float(v1.get())
     if j >= 0:
         j_sign = " + "
     else:
