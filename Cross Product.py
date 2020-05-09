@@ -6,7 +6,8 @@ root = Tk()
 
 root.title("Cross Product Calculator")
 
-v = Label(root, text="Vector 1").grid(row=0, column=0) #the labels are labels for the entries I defined in the for loops below
+Label(root, text="Vector 1").grid(row=0, column=0)#the labels are labels for the entries I defined in the for loops below
+Label(root, text="Vector 2").grid(row=3, column=0)
 
 components = {1:"i", 3:"j", 5:"k"}
 for index in components:
@@ -26,10 +27,6 @@ for i in range(1, 7): #both for loops created the entries where you can put in v
         exec ("u%s.grid(row=1, column=column_var)" % i)
         exec ('u%s.insert(0,"0")' % i)
 
-v_prime = Label(root, text="Vector 2").grid(row=3, column=0)
-
-list = [u1, u2, u3, v1, v2, v3]
-
 
 def doPrint(i_value, j_value, sign_j, k_value, sign_k):
     answer = Tk()
@@ -37,13 +34,13 @@ def doPrint(i_value, j_value, sign_j, k_value, sign_k):
     answer_label = Label(answer, text=str(i_value) + "i" + sign_j + str(abs(j_value)) + "j" + sign_k + str(abs(k_value)) + "k").grid(row=0, column=0) #i, j, k notation
     alternate_label = Label(answer, text="<" + str(i_value) + ", " + str(j_value) + ", " + str(k_value) + ">").grid(row=1, column=0) #Position vector notation
 
-def calculate():
-    for i in list:  #following lines (until final_vector is defined) convert square root symbols to sqrt() for the computer to handle
-        for y in i.get(): #i.get() is referring to the value contained in the entry
-            if y == "√":
-                entry_value = i.get()
+def square_root(list):
+    for entry in list:  #following lines (until final_vector is defined) convert square root symbols to sqrt() for the computer to handle
+        for text in entry.get(): #i.get() is referring to the value contained in the entry
+            if text == "√":
+                entry_value = entry.get()
                 before_root = "" #refers to all of the values before the square root (that will eventually be multiplied to the square root)
-                for z in i.get():
+                for z in entry.get():
                     if z == "√":
                         entry_value = entry_value.replace("√","")
                         break
@@ -53,9 +50,12 @@ def calculate():
                 entry_number = float(math.sqrt(float(entry_value)))
                 print(before_root)
                 entry_number = entry_number * float(before_root)
-                i.delete(0,"end") #deletes whatever is in the entry
-                i.insert(0,entry_number) #puts the value within the entry
+                entry.delete(0,"end") #deletes whatever is in the entry
+                entry.insert(0,entry_number) #puts the value within the entry
     
+
+def calculate():
+    square_root([u1, u2, u3, v1, v2, v3])
     final_vector = Vector(u1, u2, u3, v1, v2, v3) #creates the vector
 
     
