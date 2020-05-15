@@ -1,1 +1,90 @@
-/home/pkadekodi/Desktop/Python/Cross Product.py
+from tkinter import *
+
+import math
+
+root = Tk()
+
+root.title("Cross Product Calculator") #ONE OF THE DIFFICULTIES WAS HAVING A GUI INPUT, SO I USED TKINTER
+
+Label(root, text="Vector 1").grid(row=0, column=0)#the labels are labels for the entries I defined in the for loops below
+Label(root, text="Vector 2").grid(row=3, column=0)
+
+def make_entry(): 
+    components = {1:"i", 3:"j", 5:"k"}
+    for index in components:
+        Label(root, text=components[index]).grid(row = 1, column = index) 
+        Label(root, text=components[index]).grid(row = 4, column = index)
+    for a in range(1, 7):
+        if a > 3:
+            num = a - 3
+            column_var = (num) * 2
+            exec ("v%s=Entry(root)" % num, globals())
+            exec ("v%s.grid(row=4, column=column_var)" % num)
+            exec ('v%s.insert(0,"0")' % num)
+        else:
+            column_var = a * 2
+            exec ("u%s=Entry(root)" % a, globals()) 
+            exec ("u%s.grid(row=1, column=column_var)" % a)
+            exec ('u%s.insert(0,"0")' % a)
+
+make_entry()
+
+
+def doPrint(i_value, j_value, sign_j, k_value, sign_k):
+    answer = Tk()
+    answer.title("Answer")
+    answer_label = Label(answer, text=str(i_value) + "i" + sign_j + str(abs(j_value)) + "j" + sign_k + str(abs(k_value)) + "k").grid(row=0, column=0) #i, j, k notation
+    alternate_label = Label(answer, text="<" + str(i_value) + ", " + str(j_value) + ", " + str(k_value) + ">").grid(row=1, column=0) #Position vector notation
+
+def square_root(list): #HAVE THIS BE THE ABSTRACTION
+    for entry in list:  #following lines convert square root symbols to sqrt() for the computer to handle
+        for text in entry.get(): #i.get() is referring to the value contained in the entry
+            if text == "√":
+                entry_value = entry.get()
+                before_root = "" #refers to all of the values before the square root (that will eventually be multiplied to the square root)
+                for z in entry.get():
+                    if z == "√":
+                        entry_value = entry_value.replace("√","")
+                        break
+                    else:
+                        before_root = before_root + z
+                        entry_value = entry_value.replace(z,"",1)
+                entry_number = float(math.sqrt(float(entry_value)))
+                entry_number = entry_number * float(before_root)
+                entry.delete(0,"end") #deletes whatever is in the entry
+                entry.insert(0,entry_number) #puts the value within the entry
+    
+
+def calculate():
+    square_root([u1, u2, u3, v1, v2, v3])
+    final_vector = Vector(u1, u2, u3, v1, v2, v3) #creates the vector
+
+
+Button(root, text="Calculate", height=1, width=6, command = calculate).grid(row=6, column=0)#button that triggers the calculate process
+Button(root, text="Clear", height=1, width=6, command = make_entry).grid(row=7, column=0) #ONE OF THE PROBLEMS WAS FINDING OUT A USER FRIENDLY WAY TO START CROSS PRODUCT CALUCLATION AND CLEAR ENTRIES
+
+    
+def Vector(u1, u2, u3, v1, v2, v3):
+    i = float(u2.get()) * float(v3.get()) - float(u3.get()) * float(v2.get())
+    j = float(u3.get()) * float(v1.get()) - float(u1.get()) * float(v3.get())
+    k = float(u1.get()) * float(v2.get()) - float(u2.get()) * float(v1.get())
+    if j >= 0:
+        j_sign = " + "
+    else:
+        j_sign = " - "
+    if k >= 0:
+        k_sign = " + "
+    else:
+        k_sign = " - "
+    def convert_int(element):
+        if element - int(element) == 0.0:
+            return int(element)
+        else:
+            return element
+    i = convert_int(i)
+    j = convert_int(j)
+    k = convert_int(k)
+    doPrint(i, j, j_sign, k, k_sign)
+
+
+root.mainloop()
