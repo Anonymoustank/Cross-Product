@@ -50,12 +50,17 @@ def square_root(list): #HAVE THIS BE THE ABSTRACTION
                         before_root = before_root + z
                         entry_value = entry_value.replace(z,"",1)
                 entry_number = float(math.sqrt(float(entry_value)))
-                entry_number = entry_number * float(before_root)
+                if before_root != '':
+                    entry_number = entry_number * float(before_root)
                 entry.delete(0,"end") #deletes whatever is in the entry
                 entry.insert(0,entry_number) #puts the value within the entry
     
 
 def calculate():
+    for entry in [u1, u2, u3, v1, v2, v3]:
+        if entry.get() == '':
+            entry.insert(0, "0")
+
     square_root([u1, u2, u3, v1, v2, v3])
     final_vector = Vector(u1, u2, u3, v1, v2, v3) #creates the vector
 
